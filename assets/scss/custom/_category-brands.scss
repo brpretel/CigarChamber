@@ -1,0 +1,302 @@
+.productBrandsGrid {
+    margin: 0 0 50px;
+
+    .product-item {
+        display: inline-block;
+        text-align: center;
+        margin-bottom: 20px;
+        padding: 15px;
+        width: 50%;
+
+        @media (min-width: 768px) {
+            width: 25%;
+        }
+
+        @media (min-width: 1025px) {
+            width: 20%;
+        }
+
+        .brand-title {
+            margin: 0;
+            line-height: 1;
+
+            a {
+                font-size: 14px;
+                line-height: 1;
+                text-transform: uppercase;
+            }
+        }
+
+        .brand-imagebg {
+            position: relative;
+            width: 100%;
+            padding-bottom: 100%;
+            margin-bottom: 20px;
+            background-position: center;
+            background-size: 100%;
+            background-repeat: no-repeat;
+
+            a {
+                position: absolute;
+                display: block;
+                top: 0;
+                right: 0;
+                bottom: 0;
+                left: 0;
+            }
+        }
+
+        &:hover {
+            .brand-title {
+                color: black;
+            }
+        }
+    }
+}
+
+.letter-group-heading {
+    display: block;
+    width: 100%;
+    text-align: center;
+    position: relative;
+    padding: 0 1.5rem;
+    width: 100%;
+
+    &:before {
+        display: inline-table;
+        left: 20px;
+        width: calc(50% - 50px);
+        content: '';
+        position: absolute;
+        height: 2px;
+        top: 50%;
+        background: black;
+    }
+
+    &:after {
+        display: inline-table;
+        right: 50px;
+        width: calc(50% - 80px);
+        content: '';
+        position: absolute;
+        height: 2px;
+        top: 50%;
+        background: black;
+    }
+
+    span {
+        position: relative;
+        display: inline-block;
+        width: 40px;
+        height: 40px;
+        line-height: 38px;
+        border-radius: 50%;
+        background: black;
+        font-size: 29px;
+        font-weight: 700;
+        color: #f3e9de;
+        margin: 0 auto;
+        text-align: center;
+        font-family: $header-font-family;
+    }
+
+    .link-to-top {
+        display: block;
+        position: absolute;
+        right: 45px;
+        top: 0;
+        font-size: 12px;
+
+        span {
+            display: inline-block;
+            position: absolute;
+            font-size: 14px;
+            width: auto;
+            height: auto;
+            color: black;
+            background-color: transparent;
+        }
+    }
+}
+
+.directory-groups-letters {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+
+    .letter-group-main {
+        display: flex;
+        flex-wrap: wrap;
+        width: 100%;
+    }
+}
+
+.letter-link-A,
+.letter-group-A {
+    order: 1;
+}
+
+.letter-link-B,
+.letter-group-B {
+    order: 2;
+}
+
+.letter-link-C,
+.letter-group-C {
+    order: 3;
+}
+
+.letter-link-D,
+.letter-group-D {
+    order: 4;
+}
+
+.letter-link-E,
+.letter-group-E {
+    order: 5;
+}
+
+.letter-link-F,
+.letter-group-F {
+    order: 6;
+}
+
+.letter-link-G,
+.letter-group-G {
+    order: 7;
+}
+
+.letter-link-H,
+.letter-group-H {
+    order: 8;
+}
+
+.letter-link-I,
+.letter-group-I {
+    order: 9;
+}
+
+.letter-link-J,
+.letter-group-J {
+    order: 10;
+}
+
+.letter-link-K,
+.letter-group-K {
+    order: 11;
+}
+
+.letter-link-L,
+.letter-group-L {
+    order: 12;
+}
+
+.letter-link-M,
+.letter-group-M {
+    order: 13;
+}
+
+.letter-link-N,
+.letter-group-N {
+    order: 14;
+}
+
+.letter-link-O,
+.letter-group-O {
+    order: 15;
+}
+
+.letter-link-P,
+.letter-group-P {
+    order: 16;
+}
+
+.letter-link-Q,
+.letter-group-Q {
+    order: 17;
+}
+
+.letter-link-R,
+.letter-group-R {
+    order: 18;
+}
+
+.letter-link-S,
+.letter-group-S {
+    order: 19;
+}
+
+.letter-link-T,
+.letter-group-T {
+    order: 20;
+}
+
+.letter-link-U,
+.letter-group-U {
+    order: 21;
+}
+
+.letter-link-V,
+.letter-group-V {
+    order: 22;
+}
+
+.letter-link-W,
+.letter-group-W {
+    order: 23;
+}
+
+.letter-link-X,
+.letter-group-X {
+    order: 24;
+}
+
+.letter-link-Y,
+.letter-group-Y {
+    order: 25;
+}
+
+.letter-link-Z,
+.letter-group-Z {
+    order: 26;
+}
+
+.letter-group-navigation {
+    text-align: center;
+    margin-bottom: 30px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 100%;
+    order: 0;
+    opacity: 0;
+
+    a {
+        display: inline-block;
+        font-size: 14px;
+        color: black;
+        text-decoration: none;
+        border: 1px solid black;
+        text-align: center;
+        min-width: 33px;
+        min-height: 33px;
+        line-height: 33px;
+        margin: 0 3px 3px 0;
+        font-weight: bold;
+
+        &:hover {
+            color: #fff;
+            background-color: rgb(187, 33, 33);
+            border: 1px solid rgb(187, 33, 33);
+        }
+    }
+}
+
+.brandGrid .brand-imagebg {
+    background-color: transparent;
+    margin-top: 20px;
+}
+
+.brandGrid .brand-title a {
+    font-size: 16px;
+}

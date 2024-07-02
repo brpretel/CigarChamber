@@ -1,0 +1,19 @@
+{{#if product.custom_fields}}
+<div class="productView-properties">
+    {{#each product.custom_fields}}
+    <div class="productView-properties__line">
+        <span class="productView-properties-name">{{name}} / </span>
+        <span class="productView-properties-value">{{{value}}}</span>
+        {{#if name '===' 'Strength'}}
+        <div class="productView-properties-value strength-level {{toLowerCase value}}">
+            <span class="level-item level-1"></span>
+            <span class="level-item level-2"></span>
+            <span class="level-item level-3"></span>
+            <span class="level-item level-4"></span>
+            <span class="level-item level-5"></span>
+        </div>
+        {{/if}}
+    </div>
+    {{/each}}
+</div>
+{{/if}}

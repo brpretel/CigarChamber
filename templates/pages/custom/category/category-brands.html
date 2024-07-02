@@ -1,0 +1,77 @@
+---
+category:
+shop_by_price: true
+products:
+limit: {{theme_settings.categorypage_products_per_page}}
+products:
+featured:
+limit: {{theme_settings.sidebar_products_per_page}}
+new:
+limit: {{theme_settings.sidebar_products_per_page}}
+top_sellers:
+limit: {{theme_settings.sidebar_products_per_page}}
+---
+{{inject "categoryProductsPerPage" theme_settings.categorypage_products_per_page}}
+{{inject "categoryId" category.id}}
+{{#partial "head"}}
+{{#if pagination.category.previous}}
+<link rel="prev" href="{{pagination.category.previous}}">
+{{/if}}
+{{#if pagination.category.next}}
+<link rel="next" href="{{pagination.category.next}}">
+{{/if}}
+{{/partial}}
+
+{{#partial "page"}}
+{{{region name="category_below_header"}}}
+
+<div class="container">
+    <div class="breadcrumb-wrapper">
+        {{> components/common/breadcrumbs breadcrumbs=breadcrumbs}}
+    </div>
+    <div class="page-listing-header--content">
+        <div class="halo-description">
+            <h1 class="page-heading">{{category.name}}</h1>
+            {{#if category.description}}
+            <div class="page-description">
+                {{{category.description}}}
+            </div>
+            {{/if}}
+        </div>
+    </div>
+    <div class="page">
+        <main class="page-content">
+            {{#if category.subcategories}}
+            <ul class="productBrandsGrid brandGrid directory-groups-letters">
+                <div id="letter-group-navigation" class="letter-group-navigation">
+                    {{#each category.subcategories}}
+                    <a class="letter-link-{{#withFirst name}}{{this}}{{/withFirst}}"
+                        href="#letter-group-{{limit (toLowerCase (dashcase name)) 1}}">{{#withFirst
+                        name}}{{this}}{{/withFirst}}</a>
+                    {{/each}}
+                </div>
+                {{#each category.subcategories}}
+                <li class="product-item letter-{{#withFirst name}}{{this}}{{/withFirst}}"
+                    data-letter-group="{{#withFirst name}}{{this}}{{/withFirst}}">
+                    <div class="brand-imagebg" style="background-image:url({{getImage image 'gallery_size'}})"><a
+                            href="{{url}}"></a></div>
+                    <h4 class="brand-title"><a href="{{url}}">{{name}}</a></h4>
+                </li>
+                {{/each}}
+            </ul>
+            {{/if}}
+        </main>
+    </div>
+</div>
+
+<div class="page-listing-footer">
+    <div class="container">
+        {{{region name="category_bottom_banner--global"}}}
+        {{{region name="category_bottom_banner"}}}
+
+        {{{region name="category_image_slider--global"}}}
+        {{{region name="category_image_slider"}}}
+    </div>
+</div>
+{{/partial}}
+{{> layout/base}}

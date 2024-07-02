@@ -1,0 +1,218 @@
+<div class="form-field" data-product-attribute="set-rectangle" role="radiogroup"
+    aria-labelledby="rectangle-group-label">
+    <label class="form-label form-label--alternate form-label--inlineSmall" id="rectangle-group-label">
+        {{this.display_name}}:
+        <span data-option-value></span>
+        {{> components/common/requireness-msg}}
+    </label>
+
+    {{#unless required}}
+    <input class="form-radio" type="radio" id="attribute_rectangle__{{../id}}_none" name="attribute[{{../id}}]" value=""
+        checked="{{#if defaultValue '==' ''}}checked{{/if}}">
+    <label class="form-option" for="attribute_rectangle__{{../id}}_none">
+        <span class="form-option-variant">{{lang 'products.none'}}</span>
+    </label>
+    {{/unless}}
+
+    {{#each this.values}}
+
+    <div class="form-option-wrapper">
+        <input class="form-radio" type="radio" id="attribute_rectangle__{{../id}}_{{id}}" name="attribute[{{../id}}]"
+            value="{{id}}" {{#if selected}} checked data-default {{/if}} {{#if ../required}}required{{/if}}>
+        <label class="form-option" for="attribute_rectangle__{{../id}}_{{id}}" data-product-attribute-value="{{id}}"
+            style="border: none; font-weight: bold; color: green;">
+            {{#if @first}}
+            <span class="form-option-variant" style="font-size: 20px;">{{../min_price}}</span>
+            <span class="form-option-variant" style="font-size: 20px;">{{this.label}}</span>
+            {{else}}
+            <span class="form-option-variant" style="font-size: 20px;">{{../max_price}}</span>
+            <span class="form-option-variant" style="font-size: 20px;">{{this.label}}</span>
+            {{/if}}
+        </label>
+
+
+
+
+        {{#or min_purchase_quantity max_purchase_quantity}}
+        <div class="min-max-purchase">
+            {{/or}}
+            {{#if min_purchase_quantity}}
+            <div>
+                <dt class="productView-info-name">{{lang 'products.min_purchase_quantity'}}</dt>
+                <dd class="productView-info-value">{{lang 'products.purchase_units' quantity=min_purchase_quantity}}
+                </dd>
+            </div>
+            {{/if}}
+            {{#if max_purchase_quantity}}
+            <div>
+                <dt class="productView-info-name">{{lang 'products.max_purchase_quantity'}}</dt>
+                <dd class="productView-info-value">{{lang 'products.purchase_units' quantity=max_purchase_quantity}}
+                </dd>
+            </div>
+            {{/if}}
+            {{#or min_purchase_quantity max_purchase_quantity}}
+        </div>
+        {{/or}}
+
+        <!-- Botón Add to Cart dentro del bucle -->
+        <div id="add-to-cart-wrapper-{{id}}" class="add-to-cart-wrapper">
+            {{inject 'productQuantityErrorMessage' (lang 'products.quantity_error_message')}}
+            <div class="form-field form-field--increments" style="margin: 0;">
+                <!-- <label class="form-label form-label--alternate" for="qty-{{id}}" style="display: none;">{{lang 'products.quantity'}}</label> -->
+                <div class="form-increment" data-quantity-change>
+                    <button class="button button--icon" data-action="dec" type="button" data-id="{{id}}">
+                        <span class="is-srOnly">{{lang 'products.quantity_decrease'}}</span>
+                        <i class="icon" aria-hidden="true">
+                            <svg>
+                                <use xlink:href="#icon-keyboard-arrow-down" />
+                            </svg>
+                        </i>
+                    </button>
+                    <input class="form-input form-input--incrementTotal" id="qty-{{id}}" name="qty-{{id}}" type="tel"
+                        value="{{#if min_purchase_quantity}}{{min_purchase_quantity}}{{else}}1{{/if}}"
+                        data-quantity-min="{{#if min_purchase_quantity}}{{min_purchase_quantity}}{{else}}1{{/if}}"
+                        data-quantity-max="{{max_purchase_quantity}}" min="1" pattern="[0-9]*" aria-live="polite">
+                    <button class="button button--icon" data-action="inc" type="button" data-id="{{id}}">
+                        <span class="is-srOnly">{{lang 'products.quantity_increase'}}</span>
+                        <i class="icon" aria-hidden="true">
+                            <svg>
+                                <use xlink:href="#icon-keyboard-arrow-up" />
+                            </svg>
+                        </i>
+                    </button>
+                </div>
+            </div>
+
+            <div class="alertBox productAttributes-message" style="display:none">
+                <div class="alertBox-column alertBox-icon">
+                    <icon glyph="ic-success" class="icon" aria-hidden="true">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                            <path
+                                d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z">
+                            </path>
+                        </svg>
+                    </icon>
+                </div>
+                <p class="alertBox-column alertBox-message"></p>
+            </div>
+
+            {{#or customer (if theme_settings.restrict_to_login '!==' true)}}
+            <div class="form-action" style="margin: 0;">
+                <button id="form-action-addToCart-{{id}}" data-wait-message="{{lang 'products.adding_to_cart'}}"
+                    class="button button--primary add-to-cart-btn" type="submit" data-attribute-id="{{../id}}"
+                    data-value-id="{{id}}" data-quantity-id="qty-{{id}}"
+                    style="margin: 0; display: flex; align-items: center; justify-content: center; padding: 10px 20px; background-color: navy; color: white;">
+                    <span class="add-to-cart-text" style="padding-right: 8px;">ADD</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="white">
+                        <path
+                            d="M24 3l-.743 2h-1.929l-3.474 12h-13.239l-4.615-11h16.812l-.564 2h-13.24l2.937 7h10.428l3.432-12h4.195zm-15.5 15c-.828 0-1.5.672-1.5 1.5 0 .829.672 1.5 1.5 1.5s1.5-.671 1.5-1.5c0-.828-.672-1.5-1.5-1.5zm6.9-7-1.9 7c-.828 0-1.5.671-1.5 1.5s.672 1.5 1.5 1.5 1.5-.671 1.5-1.5c0-.828-.672-1.5-1.5-1.5z" />
+                    </svg>
+
+                </button>
+                <span class="product-status-message aria-description--hidden">{{lang 'products.adding_to_cart'}} {{lang
+                    'category.add_cart_announcement'}}</span>
+            </div>
+
+
+
+            {{/or}}
+        </div>
+    </div>
+    {{/each}}
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Selecciona todos los botones "Add to Cart"
+        const addToCartButtons = document.querySelectorAll('.add-to-cart-btn');
+
+        addToCartButtons.forEach(button => {
+            button.addEventListener('click', function (event) {
+                // Obtener los atributos de la opción seleccionada
+                const attributeId = this.getAttribute('data-attribute-id');
+                const valueId = this.getAttribute('data-value-id');
+                const quantityId = this.getAttribute('data-quantity-id');
+                const quantityInput = document.getElementById(quantityId);
+
+                // Añadir la cantidad al formulario de carrito
+                const form = this.closest('form');
+                let quantityField = form.querySelector(`input[name="qty[]"][data-attribute-id="${attributeId}"][data-value-id="${valueId}"]`);
+
+                if (!quantityField) {
+                    quantityField = document.createElement('input');
+                    quantityField.type = 'hidden';
+                    quantityField.name = 'qty[]';
+                    quantityField.setAttribute('data-attribute-id', attributeId);
+                    quantityField.setAttribute('data-value-id', valueId);
+                    form.appendChild(quantityField);
+                }
+
+                quantityField.value = quantityInput.value;
+
+                // Seleccionar el radio button correspondiente a la opción
+                const optionRadioButton = document.getElementById(`attribute_rectangle__${attributeId}_${valueId}`);
+                if (optionRadioButton) {
+                    optionRadioButton.checked = true;
+                }
+            });
+        });
+
+        // Configurar incrementos y decrementos de cantidad
+        const incrementButtons = document.querySelectorAll('[data-action="inc"]');
+        const decrementButtons = document.querySelectorAll('[data-action="dec"]');
+
+        // Función para seleccionar el botón radio correspondiente
+        function selectRadioButton(button) {
+            const attributeId = button.closest('.add-to-cart-wrapper').querySelector('.add-to-cart-btn').getAttribute('data-attribute-id');
+            const valueId = button.closest('.add-to-cart-wrapper').querySelector('.add-to-cart-btn').getAttribute('data-value-id');
+            const optionRadioButton = document.getElementById(`attribute_rectangle__${attributeId}_${valueId}`);
+            if (optionRadioButton) {
+                optionRadioButton.click();
+            }
+        }
+
+        incrementButtons.forEach(button => {
+            button.addEventListener('click', function () {
+                const input = this.closest('.form-increment').querySelector('.form-input--incrementTotal');
+                const max = parseInt(input.getAttribute('data-quantity-max'));
+                let value = parseInt(input.value);
+
+                if (!isNaN(value) && (!max || value < max)) {
+                    input.value = value + 1;
+                }
+
+                // Seleccionar el radio button correspondiente
+                selectRadioButton(this);
+            });
+        });
+
+        decrementButtons.forEach(button => {
+            button.addEventListener('click', function () {
+                const input = this.closest('.form-increment').querySelector('.form-input--incrementTotal');
+                const min = parseInt(input.getAttribute('data-quantity-min'));
+                let value = parseInt(input.value);
+
+                if (!isNaN(value) && value > min) {
+                    input.value = value - 1;
+                } else if (isNaN(value) || value <= min) {
+                    input.value = min; // Asegura que no baje del valor mínimo
+                }
+
+                // Seleccionar el radio button correspondiente
+                selectRadioButton(this);
+            });
+        });
+
+        // Añadir evento click a los divs dentro de each
+        const formOptionWrappers = document.querySelectorAll('.form-option-wrapper');
+
+        formOptionWrappers.forEach(wrapper => {
+            wrapper.addEventListener('click', function () {
+                const radio = this.querySelector('.form-radio');
+                if (radio) {
+                    radio.click();
+                }
+            });
+        });
+    });
+</script>

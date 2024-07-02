@@ -1,0 +1,133 @@
+.productView-properties {
+    color: black;
+    font-size: 14px;
+    
+    @include breakpoint("medium") {
+        padding-top: 3%;
+    }
+
+    &-value {
+        font-weight: bold;
+    }
+
+    &-strength {
+        margin-bottom: 15px;
+    }
+
+    @media (max-width: 800px) {
+        padding-top: 20px;
+    }
+
+    .strength-level {
+        width: 100%;
+        max-width: none;
+        margin-bottom: 0;
+
+        @media (max-width: 767px) {
+            width: 100%;
+        }
+    }
+
+}
+
+.strength-level {
+    display: flex;
+    margin: 5px 0 10px 0;
+    width: 286px;
+    max-width: 100%;
+    list-style: none;
+    clear: both;
+    padding: 10px 0px;
+
+    .level-item {
+        display: block;
+        position: relative;
+        float: left;
+        width: 20%;
+        width: 25px;
+        height: 20px;
+
+        &:before {
+            position: absolute;
+            top: -5px;
+            left: 50%;
+            display: none;
+            content: "";
+            margin-left: -4.5px;
+            border-top: 8px solid red;
+            border-left: 6.5px solid transparent;
+            border-right: 6.5px solid transparent;
+        }
+    }
+
+    .level-1 {
+        background-color: #f2e205;
+        border-top-left-radius: 20px;
+        border-bottom-left-radius: 20px;
+    }
+
+    .level-2 {
+        background-color: #f2b705;
+    }
+
+    .level-3 {
+        background-color: #f28705;
+    }
+
+    .level-4 {
+        background-color: #ef501d;
+    }
+
+    .level-5 {
+        background-color: #b22222;
+        border-top-right-radius: 20px;
+        border-bottom-right-radius: 20px;
+    }
+
+    &.mild {
+        .level-1:before {
+            display: block;
+        }
+    }
+
+    &.mild-medium {
+        .level-2:before {
+            display: block;
+        }
+    }
+
+    &.medium {
+        .level-3:before {
+            display: block;
+        }
+    }
+
+    &.medium-full {
+        .level-4:before {
+            display: block;
+        }
+    }
+
+    &.full {
+        .level-5:before {
+            display: block;
+        }
+    }
+
+    &.varies {
+        .level-1:before {
+            display: block;
+        }
+
+        .level-5:before {
+            display: block;
+        }
+    }
+}
+
+// Wrapper for product detail
+// -----------------------------------------------------------------------------
+.product-detail-wrapper{
+    display: flex;
+    flex-direction: column;
+}
